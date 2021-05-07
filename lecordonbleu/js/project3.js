@@ -86,3 +86,36 @@ $(function(){
 	})
   
 });
+
+
+
+
+
+  //-----------------------------스크롤버튼
+  $(".scroll span").each(function(){
+      var thisOffset = $("."+$(this).data('id')).offset().top;
+
+      $(this).click(function(){
+          $("html, body").animate({
+              scrollTop : thisOffset
+          }, 1000);
+          $(this).addClass('on');
+      });
+  });
+
+
+
+//----------------------------섹션이동 시 리모콘에 하이라이트
+$(document).scroll(function(){
+  var scrolltop = $(window).scrollTop();
+  $("header, section, footer").each(function(){
+      if(scrolltop >= $(this).offset().top){
+          $("span[data-id="+$(this).attr('class')+"]").addClass('on').siblings().removeClass('on');
+      }
+      else if(scrolltop >= $(".section7").offset().top +130){
+          $("span[data-id=footer]").addClass('on').siblings().removeClass('on');
+      }
+  });
+});
+
+//이페이지에 적용된 스크롤리모콘은 각영역의 top = $(window).scrollTop()일때를 구현, 미리 켜지는 경우는 따로따로 값을 입력해야한다.
